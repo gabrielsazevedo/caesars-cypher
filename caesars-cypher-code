@@ -1,0 +1,151 @@
+package mycode;
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class MyCode {
+
+	public static void main(String[] args) {
+		char[] letra_senha;
+		char[] letra_alfabeto;
+		String senha = "";
+
+		letra_alfabeto = new char[35];
+		letra_senha = new char[50];
+
+		senha = receber_senha(senha);
+
+		preencher_vetor_senha(senha, letra_senha);
+
+		preencher_vetor_alfabeto(letra_alfabeto);
+
+		criptografar_senha(senha, letra_senha, letra_alfabeto);
+
+		senha = concatenar_senha(senha, letra_senha);
+
+		mostrar_senha(senha);
+
+	} // main
+
+	public static String receber_senha(String senha) {
+
+		@SuppressWarnings("resource")
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("~~~~ DIGITE UMA PALAVRA ~~~~\n");
+		senha = scan.nextLine();
+
+		if (senha == "") {
+
+			System.out.println("------- TENTE DE NOVO E DIGITE UMA PALAVRA VÁLIDA -------");
+			System.exit(0);
+
+		}
+
+		senha = senha.toUpperCase();
+
+		return senha;
+
+	} // receber_senha
+
+	public static void preencher_vetor_senha(String senha, char[] letra_senha) {
+		int i;
+
+		for (i = 0; i < senha.length(); i++) {
+
+			letra_senha[i] = senha.charAt(i);
+
+		}
+
+	} // preencher_vetor_senha
+
+	public static void preencher_vetor_alfabeto(char[] letra_alfabeto) {
+
+		letra_alfabeto[0] = 'A';
+		letra_alfabeto[1] = 'B';
+		letra_alfabeto[2] = 'C';
+		letra_alfabeto[3] = 'D';
+		letra_alfabeto[4] = 'E';
+		letra_alfabeto[5] = 'F';
+		letra_alfabeto[6] = 'G';
+		letra_alfabeto[7] = 'H';
+		letra_alfabeto[8] = 'I';
+		letra_alfabeto[9] = 'J';
+		letra_alfabeto[10] = 'K';
+		letra_alfabeto[11] = 'L';
+		letra_alfabeto[12] = 'M';
+		letra_alfabeto[13] = 'N';
+		letra_alfabeto[14] = 'O';
+		letra_alfabeto[15] = 'P';
+		letra_alfabeto[16] = 'Q';
+		letra_alfabeto[17] = 'R';
+		letra_alfabeto[18] = 'S';
+		letra_alfabeto[19] = 'T';
+		letra_alfabeto[20] = 'U';
+		letra_alfabeto[21] = 'V';
+		letra_alfabeto[22] = 'X';
+		letra_alfabeto[23] = 'W';
+		letra_alfabeto[24] = 'Y';
+		letra_alfabeto[25] = 'Z';
+		letra_alfabeto[26] = 'A';
+		letra_alfabeto[27] = 'B';
+		letra_alfabeto[28] = 'C';
+		letra_alfabeto[29] = 'D';
+		letra_alfabeto[30] = 'E';
+		letra_alfabeto[31] = 'F';
+		letra_alfabeto[32] = 'G';
+		letra_alfabeto[33] = 'H';
+		letra_alfabeto[34] = 'I';
+
+	} // preencher_vetor_alfabeto
+
+	public static void criptografar_senha(String senha, char[] letra_senha, char[] letra_alfabeto) {
+		int i = 0, j, c = 0, numero_aleatorio;
+
+		Random random = new Random();
+
+		numero_aleatorio = random.nextInt(1, 10);
+
+		while (i < senha.length()) {
+
+			for (j = 0; j < 26; j++) {
+
+				if (letra_senha[i] == letra_alfabeto[j]) {
+
+					c = j;
+
+					letra_senha[i] = letra_alfabeto[c + numero_aleatorio];
+
+					i++;
+
+				} // if
+
+			} // for
+
+		} // while
+
+	} // criptografar_senha
+
+	public static String concatenar_senha(String senha, char[] letra_senha) {
+		int i;
+		String senha_encripto;
+
+		senha_encripto = "" + letra_senha[0];
+
+		for (i = 1; i < senha.length(); i++) {
+
+			senha_encripto = senha_encripto + letra_senha[i];
+
+		}
+
+		return senha_encripto;
+
+	} // concatenar_senha
+
+	public static void mostrar_senha(String senha) {
+
+		System.out.println("\n------- SUA SENHA ENCRIPTOGRAFADA É: -------\n" + "\n *** " + senha + " ****");
+
+	} // mostrar_senha
+
+} // class
